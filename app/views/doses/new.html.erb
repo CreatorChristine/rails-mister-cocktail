@@ -1,0 +1,6 @@
+<h1>Add a new dose t <%= @cocktail.name %></h1>
+<%= form_for (@cocktail, @dose) do |f| %>
+<%= f.inpput :description %>
+<%= f.association :ingredient, label_method :title %>
+<%= f.submit %>
+<% end %>
