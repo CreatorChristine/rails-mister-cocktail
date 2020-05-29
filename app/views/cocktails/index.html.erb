@@ -1,18 +1,44 @@
 <div class='container'><div><h1>Cocktails List</h1></div>
 
     <div class='container'>
+    <div class="d-flex flex-row justify-content-center">
+    <div class="col-10" style="list-inline">
         <% @cocktails.each do |cocktail| %>
-            <%= link_to cocktail.name, cocktail %>
-                <ul>
-                    <li>
-                        <% cocktail.doses.each do |dose| %>
-                            <%= dose.full_description %>
-                        <% end %>
-                    </li>
-                </ul>
+                <ul><li>
+                        <%= link_to cocktail do %>
+                        <div class="card-product flex-grow">
+                            <%= cl_image_tag("srjq0ofjwezbirpxch0k",
+                                width: 400, height: 300, crop: :fill) %>
+
+                            <div class="card-product-infos">
+                                <%= cocktail.name %>
+                                : 
+                                <% cocktail.doses.each do |dose| %>
+                                    <%= dose.full_description %>
+                                <% end %>
+                            </div>
+                            <% end %>
+                        </div>
+                    </li></ul>
         <% end %>
+    </div>
+    </div>
     </div>
 
     <%= link_to "Add Cocktail", new_cocktail_path, class: "btn btn-primary btn-lg" %>
 
 </div>
+
+  <div class="footer">
+  <div class="footer-links">
+    <a href="#"><i class="fab fa-github"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+  </div>
+
+  <div class="footer-copyright">
+    This footer is made with <i class="fas fa-heart"></i> by Christine
+  </div>
+  </div>
