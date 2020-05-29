@@ -1,0 +1,6 @@
+{
+    "editor.codeActionsOnSave": null,
+    "files.associations": {
+        "*.erb": "erb"
+      }
+}
