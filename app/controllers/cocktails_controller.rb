@@ -12,7 +12,7 @@ class CocktailsController < ApplicationController
   end
 
   def create
-    @cocktail = Cocktail.new(params[:cocktail])
+    @cocktail = Cocktail.new(cocktail_params)
     if @cocktail.save
       redirect_to @cocktail
     else
@@ -21,9 +21,16 @@ class CocktailsController < ApplicationController
 
   end
 
+
+  def filter
+    @ingredient = Ingredient.find(params[:ingredient])
+    @cocktails = @ingredient.cocktails
+  end
+
+
   private 
   
   def cocktail_params
-  # params.require(:cocktails).permit(:)
+  params.require(:cocktail).permit(:name)
   end
 end

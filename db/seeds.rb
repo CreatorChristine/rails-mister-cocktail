@@ -5,14 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Ingredient.destroy_all
-Cocktail.destroy_all
+list = "https://raw.githubusercontent.com/maltyeva/iba-cocktails/master/recipes.json"
+def fetch(url)
+  data_serialized = open(url).read
+  return JSON.parse(data_serialized)
+end
 
-puts 'Seeding...'
-Cocktail.create!(name: "Margarita")
-Cocktail.create!(name: "Mud Slide")
-Cocktail.create!(name: "Bloody Mary")
-Ingredient.create(name: "lemon")
-Ingredient.create(name: "ice")
-Ingredient.create(name: "mint leaves")
-puts 'Done!'
+cocktails = fetch(list)
+
+cocktails.each do |cocktail|
+  c = Cocktail.create!(name: cocktail['name'])
+  cocktail['ingredients'].each do |ingredient|
+  i = Ingredient.find_or_create_by(
+    name: ingredient['ingredient'])
+  d = Dose.create(cocktail: c, ingredient: i, description: "#{ingredient['amount'.to_s]} #{ingredient['unit']}")
+  end
+
+end
